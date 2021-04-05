@@ -1,7 +1,7 @@
 {
-  "name": "restVsGraphQL",
+  "name": "nodeapi",
   "version": "1.0.0",
-  "description": "",
+  "description": "PoC on API comparison with Node.JS",
   "main": "server.js",
   "scripts": {
     "devStart" : "nodemon server.js",

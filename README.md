@@ -23,10 +23,16 @@ http://localhost:5000/graphql
 ## Build container
 ```
 cd src
-docker build .
+docker build . -t pfarkas80/nodeapi:latest-pie --platform linux/arm/v7
 ```
 ## Start container
 From a unix host
 ```
-docker run -p 8080:5000 -d pfarkas80/nodeapi
+docker run -p 8080:5000 -d pfarkas80/nodeapi:latest-pie
+```
+
+## Migrate container without repository
+```
+docker save -o c:\temp\nodeapi_pie.tar pfarkas80/nodeapi:latest-pie
+docker load -i /media/hdd/nodeapi_pie.tar
 ```

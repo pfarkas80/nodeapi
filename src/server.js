@@ -173,7 +173,7 @@ app.get('/api/books', (req, res) => {
 app.get('/api/books/:id', (req, res) => {
     console.log(`Received GET book by id: ${req.params.id}`)
     const book = books.find(b => b.id == req.params.id)
-    return JSON.stringify(book)
+    res.end(JSON.stringify(book))
 })
 app.post('/api/books', (req, res) => {
     let body = JSON.parse(JSON.stringify(req.body)) //WTF?
