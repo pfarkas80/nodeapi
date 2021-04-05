@@ -20,18 +20,7 @@ const authors = JSON.parse(rawdata)
 console.log('Parsing books...')
 rawdata = fs.readFileSync('books.json')
 const books = JSON.parse(rawdata)
-// Construct a schema, using GraphQL schema language
-// var schema = buildSchema(`
-//   type Query {
-//     hello: String
-//   }
-// `);
-// The root provides a resolver function for each API endpoint
-// var root = {
-//   hello: () => {
-//     return 'Hello world!';
-//   },
-// };
+
 const AuthorType = new GraphQLObjectType({
     name : 'Author',
     description : 'Writer of a book',
@@ -151,15 +140,6 @@ const RootMutationType = new GraphQLObjectType({
 const schema = new GraphQLSchema({
     query : RootQueryType,
     mutation : RootMutationType
-    // query : new GraphQLObjectType({
-    //     name : 'hello',
-    //     fields : () => ({
-    //         message: { 
-    //             type: GraphQLString,
-    //             resolve: (parent, args) => 'Hello world'
-    //         }
-    //     })
-    // })
 })
  
 var app = express();
@@ -168,7 +148,6 @@ app.use(express.json())
 //GRAPHQL
 app.use('/graphql', graphqlHTTP({
   schema: schema,
-//   rootValue: root,
   rootValue: RootQueryType,
   graphiql: true,
 }));
