@@ -1,4 +1,4 @@
-const port = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5000;
 const fs = require('fs');
 const express = require('express');
 const { graphqlHTTP } = require('express-graphql');
@@ -25,8 +25,8 @@ const AuthorType = new GraphQLObjectType({
     name : 'Author',
     description : 'Writer of a book',
     fields : () => ({
-        id : { type : GraphQLInt },
-        name : { type : GraphQLString },
+        id : { type : GraphQLNonNull(GraphQLInt) },
+        name : { type : GraphQLNonNull(GraphQLString) },
         books : {
             type : GraphQLList(BookType),
             resolve : (author) => books.filter(b => b.authorId === author.id)
@@ -136,10 +136,25 @@ const RootMutationType = new GraphQLObjectType({
     })
 })
 
+const RootSubscriptionType = new GraphQLObjectType({
+    name : 'Subscription',
+    description : 'Keep web socket open to notify subscribers about changes',
+    fields : () => ({
+        bookChanged : {
+            type : BookType,
+            description : 'Notify about any book related changes'
+        },
+        authorChanged : {
+            type : AuthorType,
+            description : 'Notify about any author related changes'
+        }
+    })
+})
 
 const schema = new GraphQLSchema({
     query : RootQueryType,
-    mutation : RootMutationType
+    mutation : RootMutationType,
+    subscription : RootSubscriptionType
 })
  
 var app = express();
@@ -160,11 +175,12 @@ app.get('/api/authors', (req, res) => {
 app.get('/api/authors/:id', (req, res) => {
     console.log(`Received GET author by id: ${req.params.id}`)
     const author = authors.find(a => a.id == req.params.id) // 5 == "5"
-    //res.end(JSON.stringify(author))
-    if (author !== undefined)
-        res.json(author)
+    if (author === undefined) {
+        res.status(404).send('Author not found')
+        return
+    }
 
-    res.status(404).send('Author not found')
+    res.json(author)
 })
 app.get('/api/books', (req, res) => {
     console.log('Received GET books')
@@ -173,7 +189,7 @@ app.get('/api/books', (req, res) => {
 app.get('/api/books/:id', (req, res) => {
     console.log(`Received GET book by id: ${req.params.id}`)
     const book = books.find(b => b.id == req.params.id)
-    res.end(JSON.stringify(book))
+    res.end(JSON.stringify(book)) //always 200
 })
 app.post('/api/books', (req, res) => {
     let body = JSON.parse(JSON.stringify(req.body)) //WTF?
@@ -187,4 +203,4 @@ app.post('/api/books', (req, res) => {
 })
 
 //web server
-app.listen(port, console.log(`Running a GraphQL API server at http://localhost:${port}/graphql`)); //string interpolation
+app.listen(PORT, console.log(`Running a GraphQL API server at http://localhost:${PORT}/graphql`)); //string interpolation

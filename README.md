@@ -36,3 +36,9 @@ docker run -p 8080:5000 -d pfarkas80/nodeapi:latest-pie
 docker save -o c:\temp\nodeapi_pie.tar pfarkas80/nodeapi:latest-pie
 docker load -i /media/hdd/nodeapi_pie.tar
 ```
+
+# References
+- https://graphql.org/graphql-js/running-an-express-graphql-server/
+- https://scotch.io/bar-talk/creating-graphql-subscriptions-in-express
+- https://github.com/apollographql/graphql-subscriptions
+- https://scotch.io/bar-talk/creating-graphql-subscriptions-in-express
