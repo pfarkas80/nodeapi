@@ -1,0 +1,13 @@
+[
+    { "id" : 1, "name":"Orwell, George" },
+    { "id" : 2, "name":"Austen, Jane" },
+    { "id" : 3, "name":"Tolstoy, Leo" },
+    { "id" : 4, "name":"Woolf, Virginia" },
+    { "id" : 5, "name":"Cunnningham, Michael" },
+    { "id" : 6, "name":"Twain, Mark" },
+    { "id" : 7, "name":"Dickens, Charles" },
+    { "id" : 8, "name":"Rowling, J.K." },
+    { "id" : 9, "name":"Marquez" },
+    { "id" : 10, "name":"Shakespeare"  },
+    { "id" : 11, "name":"Tolkien, J.R." }
+]
