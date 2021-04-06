@@ -38,6 +38,7 @@ docker load -i /media/hdd/nodeapi_pie.tar
 ```
 
 # References
+- https://www.youtube.com/watch?v=HuN94qNwQmM
 - https://graphql.org/graphql-js/running-an-express-graphql-server/
 - https://scotch.io/bar-talk/creating-graphql-subscriptions-in-express
 - https://github.com/apollographql/graphql-subscriptions
